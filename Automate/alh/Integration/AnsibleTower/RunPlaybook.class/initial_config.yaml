@@ -1,0 +1,16 @@
+---
+object_type: instance
+version: 1.0
+object:
+  attributes:
+    display_name: 
+    name: initial_config
+    inherits: 
+    description: 
+  fields:
+  - job_template_name:
+      value: Infra-SYS-initial-config
+  - param1:
+      value: deploying=1
+  - execute:
+      value: run_playbook

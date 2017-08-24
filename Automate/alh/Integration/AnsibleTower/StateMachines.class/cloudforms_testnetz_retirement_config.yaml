@@ -1,0 +1,12 @@
+---
+object_type: instance
+version: 1.0
+object:
+  attributes:
+    display_name: 
+    name: cloudforms_testnetz_retirement_config
+    inherits: 
+    description: 
+  fields:
+  - run_playbook:
+      value: "/Integration/AnsibleTower/RunPlaybook/cloudforms_testnetz_retirement_config"
