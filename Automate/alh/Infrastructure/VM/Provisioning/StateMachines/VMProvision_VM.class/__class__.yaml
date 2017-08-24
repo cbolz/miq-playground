@@ -208,8 +208,7 @@ object:
       condition: 
       on_entry: update_provision_status(status => 'BlueCat IPAM registration initiated')
       on_exit: update_provision_status(status => 'BlueCat IPAM registration running')
-      on_error: update_provision_status(status => 'BlueCat IPAM registraton ended
-        with error')
+      on_error: update_provision_status(status => 'BlueCat IPAM registraton ended with error')
       max_retries: '100'
       max_time: 
   - field:
@@ -229,8 +228,7 @@ object:
       condition: 
       on_entry: update_provision_status(status => 'DNS check host visibility initiated')
       on_exit: update_provision_status(status => 'DNS check host visibility running')
-      on_error: update_provision_status(status => 'DNS check host visibility ended
-        with error')
+      on_error: update_provision_status(status => 'DNS check host visibility ended with error')
       max_retries: '100'
       max_time: 
   - field:
@@ -250,8 +248,7 @@ object:
       condition: 
       on_entry: update_provision_status(status => 'Satellite host registration initiated')
       on_exit: update_provision_status(status => 'Satellite host registration running')
-      on_error: update_provision_status(status => 'Satellite host registration ended
-        with error')
+      on_error: update_provision_status(status => 'Satellite host registration ended with error')
       max_retries: 
       max_time: 
   - field:
@@ -269,12 +266,9 @@ object:
       scope: 
       description: 
       condition: 
-      on_entry: update_provision_status(status => 'Initial config via Ansible Tower
-        initiated')
-      on_exit: update_provision_status(status => 'Initial config via Ansible Tower
-        running')
-      on_error: update_provision_status(status => 'Initial config via Ansible Tower
-        ended with error')
+      on_entry: update_provision_status(status => 'Initial config via Ansible Tower initiated')
+      on_exit: update_provision_status(status => 'Initial config via Ansible Tower running')
+      on_error: update_provision_status(status => 'Initial config via Ansible Tower ended with error')
       max_retries: 
       max_time: 
   - field:
@@ -312,12 +306,9 @@ object:
       scope: 
       description: 
       condition: 
-      on_entry: update_provision_status(status => 'Started specific post-provision
-        tasks')
-      on_exit: update_provision_status(status => 'Running specific post-provision
-        tasks')
-      on_error: update_provision_status(status => 'Error specific post-provision
-        tasks')
+      on_entry: update_provision_status(status => 'Started specific post-provision tasks')
+      on_exit: update_provision_status(status => 'Running specific post-provision tasks')
+      on_error: update_provision_status(status => 'Error specific post-provision tasks')
       max_retries: '100'
       max_time: 
   - field:

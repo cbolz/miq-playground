@@ -7,6 +7,6 @@ object:
     name: cloudforms_testnetz_check_provisioned
     inherits: 
     description: 
-  fields:
+  fields: 
   - run_playbook:
       value: "/Integration/AnsibleTower/RunPlaybook/cloudforms_testnetz_check_provisioned"

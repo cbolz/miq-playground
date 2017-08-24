@@ -34,17 +34,8 @@ begin
   # have $evm.root['vm'] pre-loaded with the VM with this ID
   #
   
-  vm = nil
-  
-  if $evm.root['miq_provision'].nil?
-    # probably called during retirement, we need to retreive from $evm.root
-    $evm.log("info", "Looks like we're retiring, ...")
-    vm = $evm.root['vm']
-  else
-    $evm.log("info", "Looks like we're provisioning, ...")
-    prov = $evm.root["miq_provision"]
-    vm = prov.vm
-  end
+  prov = $evm.root["miq_provision"]
+  vm = prov.vm
   
   if vm.nil?
     $evm.log("info", "No VM object found! We still try to carry on...")
