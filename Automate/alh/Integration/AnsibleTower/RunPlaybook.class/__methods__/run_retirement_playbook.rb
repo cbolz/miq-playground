@@ -46,9 +46,12 @@ begin
   attrs['Vm::vm'] = vm.id
   
   # check on which provider we're running - if it's not in Testnetz (aka RHVMT) we remove '-testnetz'
-  providerid = prov.get_option(:src_ems_id)
-  provider = $evm.vmdb("ext_management_system").find_by_id(providerid)
-  $evm.log("info", "Using provider: #{provider.inspect}")
+  provider=$evm.root['vm'].ext_management_system
+  if provider.nil?
+    $evm.log("error", "Failed to find provider for VM #{vm.name}")
+    exit MIQ_OK
+  end
+
   if not provider.name.include?("RHVMT")
     # remove substring '-testnetz' from the playbook name
     attrs['job_template_name'] = $evm.object['job_template_name'].gsub('-testnetz','')
