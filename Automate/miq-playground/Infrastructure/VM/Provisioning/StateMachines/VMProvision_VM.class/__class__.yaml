@@ -198,7 +198,7 @@ object:
       datatype: string
       priority: 10
       owner: 
-      default_value: "/Integration/IPAM/BlueCat/update_host_with_dhcp_address "
+      default_value: "#/Integration/IPAM/BlueCat/update_host_with_dhcp_address "
       substitute: true
       message: create
       visibility: 
@@ -218,7 +218,7 @@ object:
       datatype: string
       priority: 11
       owner: 
-      default_value: "/Integration/IPAM/BlueCat/check_dns_name_available"
+      default_value: "#/Integration/IPAM/BlueCat/check_dns_name_available"
       substitute: true
       message: create
       visibility: 
@@ -238,7 +238,7 @@ object:
       datatype: string
       priority: 12
       owner: 
-      default_value: "/Integration/Satellite/Provisioning/register_satellite"
+      default_value: "#/Integration/Satellite/Provisioning/register_satellite"
       substitute: true
       message: create
       visibility: 
