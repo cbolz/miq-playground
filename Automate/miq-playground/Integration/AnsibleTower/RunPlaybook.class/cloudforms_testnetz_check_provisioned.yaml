@@ -9,6 +9,6 @@ object:
     description: 
   fields:
   - job_template_name:
-      value: cloudforms-testnetz-check-provisioned
+      value: HelloWorld
   - execute:
       value: run_playbook
