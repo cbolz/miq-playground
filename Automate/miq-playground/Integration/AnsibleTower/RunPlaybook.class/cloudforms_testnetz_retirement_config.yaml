@@ -11,4 +11,4 @@ object:
   - job_template_name:
       value: HelloWorld
   - execute:
-      value: run_playbook
+      value: run_retirement_playbook
