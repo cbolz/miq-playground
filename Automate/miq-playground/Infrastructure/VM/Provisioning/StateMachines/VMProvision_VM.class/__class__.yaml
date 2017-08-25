@@ -251,14 +251,34 @@ object:
       on_error: update_provision_status(status => 'Satellite host registration ended with error')
       max_retries: 
       max_time: 
-  - field:
+- field:
       aetype: state
       name: RunAnsiblePlaybook
       display_name: 
       datatype: string
       priority: 13
       owner: 
-      default_value: "/Integration/AnsibleTower/StateMachines/cloudforms_testnetz_check_provisioned"
+      default_value: "/Integration/AnsibleTower/Methods/setup_provisioning_job"
+      substitute: true
+      message: create
+      visibility: 
+      collect: 
+      scope: 
+      description: 
+      condition: 
+      on_entry: update_provision_status(status => 'Initial config via Ansible Tower initiated')
+      on_exit: update_provision_status(status => 'Initial config via Ansible Tower running')
+      on_error: update_provision_status(status => 'Initial config via Ansible Tower ended with error')
+      max_retries: 
+      max_time: 
+  - field:
+      aetype: state
+      name: RunAnsiblePlaybook
+      display_name: 
+      datatype: string
+      priority: 14
+      owner: 
+      default_value: "/AutomationManagement/AnsibleToewr/Operations/StateMachines/Job/Default"
       substitute: true
       message: create
       visibility: 
@@ -276,7 +296,7 @@ object:
       name: PostProvision
       display_name: 
       datatype: string
-      priority: 14
+      priority: 15
       owner: 
       default_value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/PostProvision#${/#miq_provision.source.vendor}"
       substitute: true
@@ -296,7 +316,7 @@ object:
       name: alh_postprovision
       display_name: Apply specific provisioning Tasks
       datatype: string
-      priority: 15
+      priority: 16
       owner: 
       default_value: "#/Infrastructure/VM/Provisioning/StateMachines/Methods/alh_postprovision"
       substitute: true
@@ -316,7 +336,7 @@ object:
       name: EmailOwner
       display_name: 
       datatype: string
-      priority: 16
+      priority: 17
       owner: 
       default_value: "/Infrastructure/VM/Provisioning/Email/MiqProvision_Complete?event=vm_provisioned"
       substitute: true
@@ -336,7 +356,7 @@ object:
       name: Finished
       display_name: 
       datatype: string
-      priority: 17
+      priority: 18
       owner: 
       default_value: "/System/CommonMethods/StateMachineMethods/vm_provision_finished"
       substitute: true

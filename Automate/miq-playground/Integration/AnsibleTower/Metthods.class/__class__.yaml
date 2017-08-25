@@ -5,12 +5,12 @@ object:
   attributes:
     description: 
     display_name: 
-    name: RunPlaybook
+    name: Methods
     type: 
     inherits: 
     visibility: 
     owner: 
-  schema:
+  schema: 
   - field:
       aetype: attribute
       name: provisioning_job_template_name
@@ -18,7 +18,7 @@ object:
       datatype: string
       priority: 1
       owner: 
-      default_value: 
+      default_value: cloudforms_testnetz_check_provisioned
       substitute: true
       message: create
       visibility: 
@@ -33,12 +33,12 @@ object:
       max_time: 
   - field:
       aetype: attribute
-      name: param1
+      name: retirement_job_template_name
       display_name: 
       datatype: string
       priority: 2
       owner: 
-      default_value: 
+      default_value: cloudforms_testnetz_retirement_config
       substitute: true
       message: create
       visibility: 
