@@ -38,7 +38,7 @@ object:
       datatype: string
       priority: 2
       owner: 
-      default_value: "/Integration/IPAM/BlueCat/register_new_hostname_with_random_mac"
+      default_value: "#/Integration/IPAM/BlueCat/register_new_hostname_with_random_mac"
       substitute: true
       message: create
       visibility: 
