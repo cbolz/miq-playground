@@ -3,7 +3,7 @@ object_type: method
 version: 1.0
 object:
   attributes:
-    name: setup_provisioning_job
+    name: get_network_list
     display_name: 
     description: 
     scope: instance

@@ -5,12 +5,12 @@ object:
   attributes:
     description: 
     display_name: 
-    name: Methods
+    name: DynamicDialog
     type: 
     inherits: 
     visibility: 
     owner: 
-  schema: 
+  schema:
   - field:
       aetype: method
       name: execute

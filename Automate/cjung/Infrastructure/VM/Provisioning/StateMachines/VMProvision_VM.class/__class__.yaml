@@ -118,7 +118,7 @@ object:
       datatype: string
       priority: 6
       owner: 
-      default_value: "/Integration/AnsibleTower/Methods/set_job_template"
+      default_value: "/Integration/AnsibleTower/Methods/SetJobTemplateName"
       substitute: true
       message: create
       visibility: 
