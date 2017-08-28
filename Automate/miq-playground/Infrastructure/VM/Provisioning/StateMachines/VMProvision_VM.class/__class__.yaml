@@ -281,7 +281,7 @@ object:
       datatype: string
       priority: 14
       owner: 
-      default_value: "/AutomationManagement/AnsibleTower/Operations/StateMachines/Jobs/Default"
+      default_value: "/AutomationManagement/AnsibleTower/Operations/StateMachines/Jobs/default"
       substitute: true
       message: create
       visibility: 
