@@ -1,4 +1,4 @@
 lanaguage: ruby
 
 script:
-- curl -k -X POST -d'{"action":"refresh_from_source"}' https://github:github1213@cf-github.familie-jung.rocks/api/automate_domains/miq-playground
+- curl -k -X POST -d'{"action":"refresh_from_source"}' https://github:github1213@cf-go.familie-jung.rocks/api/automate_domains/miq-playground

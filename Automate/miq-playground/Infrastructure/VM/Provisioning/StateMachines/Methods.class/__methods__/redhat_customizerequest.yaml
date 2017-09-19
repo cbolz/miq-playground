@@ -3,7 +3,7 @@ object_type: method
 version: 1.0
 object:
   attributes:
-    name: wait_for_playbook
+    name: redhat_CustomizeRequest
     display_name: 
     description: 
     scope: instance
