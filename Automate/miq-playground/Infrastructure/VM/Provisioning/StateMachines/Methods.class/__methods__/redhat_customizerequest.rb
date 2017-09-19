@@ -34,4 +34,27 @@ if not dialog_fqdn.nil?
   prov.set_option(:vm_target_hostname,dialog_fqdn)
 end
 
+tshirtsize = prov.get_option(:dialog_tshirtsize)
+
+case tshirtsize
+when "M"
+    prov.set_option(:vm_memory,4096)
+    prov.set_option(:cores_per_socket,2)
+    $evm.log("info", "T-Shirt Size Medium: 2 Cores, 4 GB RAM")
+when "L"
+    prov.set_option(:vm_memory,4096)
+    prov.set_option(:cores_per_socket,4)
+    $evm.log("info", "T-Shirt Size Large: 4 Cores, 4 GB RAM")
+when "XL"
+    prov.set_option(:vm_memory,8192) 
+    prov.set_option(:cores_per_socket,4)
+    $evm.log("info", "T-Shirt Size Extra Large: 4 Cores, 8 GB RAM")
+else 
+    $evm.log("warn", "Unkonwn T-Shirt Size!")
+end
+
+prov.set_option(:number_of_sockets, 1)
+
+prov.attributes.sort.each { |k,v| $evm.log("info", "Prov attributes: #{v}: #{k}") }
+
 $evm.log("info", "Provisioning ID:<#{prov.id}> Provision Request ID:<#{prov.miq_provision_request.id}> Provision Type: <#{prov.provision_type}>")
