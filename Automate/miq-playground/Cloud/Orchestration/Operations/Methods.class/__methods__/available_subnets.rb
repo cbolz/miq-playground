@@ -2,6 +2,8 @@
 # Description: provide the dynamic list content from available subnets
 #
 
+$evm.instantiate('/Discovery/ObjectWalker/object_walker')
+
 def initialize(handle = $evm)
   @handle = handle
 end
@@ -12,7 +14,6 @@ end
 
 def fetch_list_data
   service = @handle.root.attributes["service_template"] || @handle.root.attributes["service"]
-  $evm.instantiate('/Discovery/ObjectWalker/object_walker')
 
   av_tenants = service.try(:orchestration_manager).try(:cloud_tenants)
 
