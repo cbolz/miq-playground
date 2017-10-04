@@ -17,6 +17,13 @@ end
 providers = $evm.vmdb("ext_management_system").all
 providers.each { |provider| 
   $evm.log("info", "current provider: #{provider.inspect}")
+  if provider.type == "ManageIQ::Providers::Openstack::NetworkManager"
+    $evm.log("info", "Provider #{provider.name} seems to be an OpenStack Network Provider, getting list of private networks aka subnets...")
+    subnets = provider.cloud_subnets.all
+    subnets.each { |subnet|
+      $evm.log("info", "Found Subnet: #{subnet.inspect}")
+    }
+  end
 }
 
 dialog_field = $evm.object 
