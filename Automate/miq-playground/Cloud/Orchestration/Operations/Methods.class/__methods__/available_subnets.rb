@@ -2,12 +2,15 @@
 # Description: provide the dynamic list content from available subnets
 #
 
-$evm.instantiate('/Discovery/ObjectWalker/object_walker')
+#$evm.instantiate('/Discovery/ObjectWalker/object_walker')
+
+# Dump all of root's attributes to the log
+$evm.root.attributes.sort.each { |k, v| $evm.log("info", "Root:<$evm.root> Attribute - #{k}: #{v}")}
 
 list = {}
 
 tenant_name = $evm.root['dialog_tenant_name']
-if tenant_name.nil?
+if tenant_name.blank?
   list['unspecified']="select tenant first"
 end
 
