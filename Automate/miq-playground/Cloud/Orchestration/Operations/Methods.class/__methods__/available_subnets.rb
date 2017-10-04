@@ -13,7 +13,7 @@ tenant_name = $evm.root['dialog_tenant_name']
 if tenant_name.blank?
   list['unspecified']="select tenant first"
 else
-  subnets = $evm.vmdb(:private_networks).all
+  subnets = $evm.vmdb("private_networks").all
   subnets.each { |subnet| 
     $evm.log("info", "current subnet: #{subnet.inspect}")
   }
