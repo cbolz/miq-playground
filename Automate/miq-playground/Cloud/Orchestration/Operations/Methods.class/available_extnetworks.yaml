@@ -9,4 +9,4 @@ object:
     description: 
   fields:
   - execute:
-      value: Available_ExtNetworksa
+      value: Available_ExtNetworks
