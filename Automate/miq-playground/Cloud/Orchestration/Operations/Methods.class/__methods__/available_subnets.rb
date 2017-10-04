@@ -19,7 +19,8 @@ providers.each { |provider|
   $evm.log("info", "current provider: #{provider.inspect}")
   if provider.type == "ManageIQ::Providers::Openstack::NetworkManager"
     $evm.log("info", "Provider #{provider.name} seems to be an OpenStack Network Provider, getting list of private networks aka subnets...")
-    subnets = provider.cloud_subnets.all
+    $evm.log("info", "Cloud Subnets: #{provider.cloud_subnets.insepct}")
+    subnets = provider.cloud_subnets
     subnets.each { |subnet|
       $evm.log("info", "Found Subnet: #{subnet.inspect}")
     }
