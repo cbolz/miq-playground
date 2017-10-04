@@ -23,7 +23,7 @@ else
         $evm.log("info", "Providers returns more than one host, this must be an UnderCloud, skipping")
         next
       end 
-      external_networks = provider.public_networks
+      external_networks = provider.cloud_networks
       external_networks.each { |external_network|
         $evm.log("info", "Found external_network: #{external_network.name} with ID #{external_network.ems_ref}")
         list[external_network.ems_ref]="#{external_network.name} on #{provider.name}"
