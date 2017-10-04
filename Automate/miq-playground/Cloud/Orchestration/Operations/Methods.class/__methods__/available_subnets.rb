@@ -16,7 +16,8 @@ else
   subnets = $evm.vmdb(:private_networks).all
   subnets.each { |subnet| 
     $evm.log("info", "current subnet: #{subnet.inspect}")
-}
+  }
+end
 
 dialog_field = $evm.object 
 
