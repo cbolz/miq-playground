@@ -25,7 +25,8 @@ else
         list[subnet.ems_ref]="#{subnet.name} on #{provider.name}"
       }
     end
-}
+  }
+end
 
 dialog_field = $evm.object 
 
