@@ -12,12 +12,12 @@ list = {}
 tenant_name = $evm.root['dialog_tenant_name']
 if tenant_name.blank?
   list['unspecified']="select tenant first"
-else
-  subnets = $evm.vmdb("private_networks").all
-  subnets.each { |subnet| 
-    $evm.log("info", "current subnet: #{subnet.inspect}")
-  }
 end
+
+providers = $evm.vmdb("ext_management_system").all
+providers.each { |provider| 
+  $evm.log("info", "current provider: #{provider.inspect}")
+}
 
 dialog_field = $evm.object 
 
