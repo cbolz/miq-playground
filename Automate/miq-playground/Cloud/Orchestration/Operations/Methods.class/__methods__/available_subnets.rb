@@ -12,19 +12,19 @@ list = {}
 tenant_name = $evm.root['dialog_tenant_name']
 if tenant_name.blank?
   list['unspecified']="select tenant first"
-end
-
-providers = $evm.vmdb("ext_management_system").all
-providers.each { |provider| 
-  $evm.log("info", "current provider: #{provider.inspect}")
-  if provider.type == "ManageIQ::Providers::Openstack::NetworkManager"
-    $evm.log("info", "Provider #{provider.name} seems to be an OpenStack Network Provider, getting list of private networks aka subnets...")
-    subnets = provider.cloud_subnets
-    subnets.each { |subnet|
-      $evm.log("info", "Found Subnet: #{subnet.name} with ID #{subnet.ems_ref}")
-      list[subnet.ems_ref]="#{subnet.name} on #{provider.name}"
-    }
-  end
+else
+  providers = $evm.vmdb("ext_management_system").all
+  providers.each { |provider| 
+    $evm.log("info", "current provider: #{provider.inspect}")
+    if provider.type == "ManageIQ::Providers::Openstack::NetworkManager"
+      $evm.log("info", "Provider #{provider.name} seems to be an OpenStack Network Provider, getting list of private networks aka subnets...")
+      $evm.log("info", "Hosts: #{provider.hosts}")
+      subnets = provider.cloud_subnets
+      subnets.each { |subnet|
+        $evm.log("info", "Found Subnet: #{subnet.name} with ID #{subnet.ems_ref}")
+        list[subnet.ems_ref]="#{subnet.name} on #{provider.name}"
+      }
+    end
 }
 
 dialog_field = $evm.object 
