@@ -9,8 +9,8 @@ $evm.root.attributes.sort.each { |k, v| $evm.log("info", "Root:<$evm.root> Attri
 
 list = {}
 
-tenant_name = $evm.root['dialog_tenant_name']
-if tenant_name.blank?
+tenant_id = $evm.root['dialog_tenant_id']
+if tenant_id.blank?
   list['unspecified']="select tenant first"
 else
   providers = $evm.vmdb("ext_management_system").all

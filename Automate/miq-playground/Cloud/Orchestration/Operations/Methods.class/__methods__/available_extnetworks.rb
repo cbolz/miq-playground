@@ -9,7 +9,7 @@ $evm.root.attributes.sort.each { |k, v| $evm.log("info", "Root:<$evm.root> Attri
 
 list = {}
 
-tenant_id = $evm.root['dialog_tenant_name']
+tenant_id = $evm.root['dialog_tenant_id']
 if tenant_id.blank?
   list['unspecified']="select tenant first"
 else
