@@ -26,7 +26,7 @@ else
       external_networks = provider.cloud_networks
       external_networks.each { |external_network|
         $evm.log("info", "External Network: #{external_network.inspect}")
-        $evm.log("info", "Found external_network: #{external_network.name} with ID #{external_network.ems_ref}")
+        $evm.log("info", "Found external_network: #{external_network.name} with ID #{external_network.ems_ref} and cloud_tenant #{external_network.cloud_tenant.inspect}")
         list[external_network.ems_ref]="#{external_network.name} on #{provider.name}"
       }
     end
