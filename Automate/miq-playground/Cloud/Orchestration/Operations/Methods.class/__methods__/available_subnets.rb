@@ -15,7 +15,10 @@ tenant_id = $evm.root['dialog_tenant_id']
 if tenant_id.blank?
   list['unspecified']="select tenant first"
 else
-  tenant = $evm.vmdb("cloud_tenant").find_by_id(tenant_id)
+  tenants = $evm.vmdb("cloud_tenant").all 
+  tenants.each { |tenant|
+    $evm.log("info", "Tenant: #{tenant.inspect}")
+  }
   $evm.log("info", "Found tenant #{tenant.inspect}")
 end 
 
