@@ -23,7 +23,7 @@ else
   external_networks.each { |external_network|
     $evm.log("info", "External Network: #{external_network.inspect}")
     $evm.log("info", "Found external_network: #{external_network.name} with ID #{external_network.ems_ref} and cloud_tenant #{external_network.cloud_tenant.inspect}")
-    if external_network.cloud_tenant.id.nil?
+    if external_network.cloud_tenant.nil?
       $evm.log("info", "This network does not have a tenant, ignoring it")
     else 
       $evm.log("info", "Checking cloud_tenant from external_network: #{external_network.cloud_tenant.id}")      
