@@ -24,8 +24,7 @@ else
     $evm.log("info", "Provider #{provider.name} seems to be an OpenStack Network Provider")
     $evm.log("info", "Hosts: #{provider.hosts}")
     if provider.hosts.length > 0 
-      $evm.log("info", "Providers returns more than one host, this must be an UnderCloud, skipping")
-      next
+      $evm.log("info", "Providers returns more than one host, this must be an UnderCloud, skipping") 
     end 
 
     $evm.log("info", "getting list of private networks aka subnets...")
