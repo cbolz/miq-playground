@@ -18,14 +18,23 @@ cloud_network = nil
 $evm.log("info", "Search for external network with ems_ref: #{external_network_id}")
 
 external_networks.each { |external_network|
-  $evm.log("info", "External network: #{external_network.inspect}")
+  $evm.log("info", "External network: #{external_network.name}")
   if external_network.ems_ref == external_network_id
     cloud_network = external_network
     break 
   end 
 }
 
-$evm.log("info", "Found external_network #{cloud_network.inspect} by ems_ref #{external_network_id}")
+if cloud_network.nil?
+  $evm.log("info", "Failed to find selected network")
+  list['unspecified']="select external network first"
+else 
+  $evm.log("info", "Found external_network #{cloud_network.inspect} by ems_ref #{external_network_id}")
+
+  cloud_network.cloud_subnets.each { |subnet|
+    $evm.log("info", "Current subnet: #{subnet.inspect}")
+  }
+end 
 
 #
 #
