@@ -24,11 +24,15 @@ else
     $evm.log("info", "External Network: #{external_network.inspect}")
     $evm.log("info", "Found external_network: #{external_network.name} with ID #{external_network.ems_ref} and cloud_tenant #{external_network.cloud_tenant.inspect}")
     $evm.log("info", "Checking cloud_tenant from external_network: #{external_network.cloud_tenant.id}")
-    if external_network.cloud_tenant.id == tenant_id
-      $evm.log("info", "Adding network to dialog, tenant ID does match")
-      list[external_network.ems_ref]="#{external_network.name} on #{provider.name}"
+    if external_network.cloud_tenant.id.nil?
+      $evm.log("info", "This network does not have a tenant, ignoring it")
     else 
-      $evm.log("info", "Ignoring network since tenant ID doesn't match")
+      if external_network.cloud_tenant.id == tenant_id
+        $evm.log("info", "Adding network to dialog, tenant ID does match")
+        list[external_network.ems_ref]="#{external_network.name} on #{provider.name}"
+      else 
+        $evm.log("info", "Ignoring network since tenant ID doesn't match")
+      end 
     end 
   }
 end
