@@ -18,7 +18,7 @@ cloud_network = nil
 $evm.log("info", "Search for external network with ems_ref: #{external_network_id}")
 
 external_networks.each { |external_network|
-  $evm.log("info", "External network: #{external_network.name}")
+  $evm.log("info", "Checking external network: #{external_network.name}")
   if external_network.ems_ref == external_network_id
     cloud_network = external_network
     break 
@@ -32,38 +32,10 @@ else
   $evm.log("info", "Found external_network #{cloud_network.inspect} by ems_ref #{external_network_id}")
 
   cloud_network.cloud_subnets.each { |subnet|
-    $evm.log("info", "Current subnet: #{subnet.inspect}")
+    $evm.log("info", "Adding subnet: #{subnet.name} with ems_ref #{subnet.ems_ref}")
+    list[subnet.ems_ref]="#{subnet.name}"
   }
 end 
-
-#
-#
-#
-#
-
-# tenant_id = $evm.root['dialog_tenant_id']
-# if tenant_id.blank?
-#   list['unspecified']="select tenant first"
-# else
-#   tenant = $evm.vmdb("cloud_tenant").find_by_id(tenant_id)
-#   $evm.log("info", "Found tenant #{tenant.name} by ID #{tenant_id}")
-
-#   provider = tenant.ext_management_system
-#   $evm.log("info", "Found provider #{provider.name} from tenant relationship")
-
-#   $evm.log("info", "current provider: #{provider.inspect}")
-#   if provider.type == "ManageIQ::Providers::Openstack::CloudManager"
-#     $evm.log("info", "Provider #{provider.name} seems to be an OpenStack Provider")
-
-#     $evm.log("info", "getting list of private networks aka subnets...")
-#     $evm.log("info", "Output of tenant: #{tenant.inspect}")
-#     subnets = provider.cloud_subnets
-#     subnets.each { |subnet|
-#       $evm.log("info", "Found Subnet: #{subnet.name} with ID #{subnet.ems_ref} and details: #{subnet.inspect}")
-#       list[subnet.ems_ref]="#{subnet.name} on #{provider.name}"
-#     }
-#   end
-# end 
 
 dialog_field = $evm.object 
 
