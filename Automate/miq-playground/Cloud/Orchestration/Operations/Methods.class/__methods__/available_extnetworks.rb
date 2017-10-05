@@ -26,7 +26,7 @@ else
     if external_network.cloud_tenant.nil?
       $evm.log("info", "This network does not have a tenant, ignoring it")
     else 
-      $evm.log("info", "Checking cloud_tenant from external_network: #{external_network.cloud_tenant.id}")      
+      $evm.log("info", "Checking cloud_tenant from external_network: #{external_network.cloud_tenant.id.inspect} and tenant ID from dialog: #{tenant_id.inspect}")      
       if external_network.cloud_tenant.id.to_i == tenant_id.to_i
         $evm.log("info", "Adding network to dialog, tenant ID does match")
         list[external_network.ems_ref]="#{external_network.name} on #{provider.name}"
