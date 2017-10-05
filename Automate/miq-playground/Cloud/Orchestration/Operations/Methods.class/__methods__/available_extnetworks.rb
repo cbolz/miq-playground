@@ -26,13 +26,14 @@ else
   require 'fog/openstack'
 
   credentials={
-    :provider => "OpenStack",
     :openstack_api_key => provider.authentication_password,
     :openstack_username => provider.authentication_userid,
-    :openstack_auth_url => "http://#{provider.hostname}:#{provider.port}/v2.0/tokens",
+    :openstack_auth_url => "http://#{provider.hostname}:#{provider.port}/v3/auth/tokens",
     :openstack_project_name => tenant.ems_ref,
     :openstack_domain_name => provider.name
   }
+
+  $evm.log("info", "Credentials: #{credentials.inspect}")
 
   network = Fog::Network.new(credentials)
   external_networks = network.list_networks
