@@ -38,7 +38,7 @@ else
 
   network = Fog::Network.new(credentials)
   external_networks = network.list_networks
-  $evm.log("info", "External Networks from FOG: #{external_networks}")
+  $evm.log("info", "External Networks from FOG: #{external_networks.body}")
 
   # external_networks.each { |external_network|
   #   $evm.log("info", "Found external_network: #{external_network.name} with ID #{external_network.ems_ref}")
