@@ -30,7 +30,7 @@ else
     :openstack_api_key => provider.authentication_password,
     :openstack_username => provider.authentication_userid,
     :openstack_auth_url => "http://#{provider.hostname}:#{provider.port}/v2.0/tokens",
-    :openstack_project_name => tenant.ems_ref
+    :openstack_project_name => tenant.ems_ref,
     :openstack_domain_name => provider.name
   }
 
