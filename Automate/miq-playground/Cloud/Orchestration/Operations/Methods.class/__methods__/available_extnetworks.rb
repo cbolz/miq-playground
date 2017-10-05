@@ -43,8 +43,8 @@ else
   networks = external_networks.body["networks"]
   networks.each { |network|
     $evm.log("info", "Current network: #{network.inspect}")
-    if network["tenant_id"] == tenant.ems_ref
-      $evm.log("info", "Tenant ID matches, adding to list")
+    if network["router:external"] == true
+      $evm.log("info", "Network is an external network, adding it to the list")
       networkname = network["name"]
       list[network["id"]]="#{networkname} on Provider #{provider.name}"
     end 
