@@ -20,13 +20,18 @@ providers.each { |provider|
     end 
 
     $evm.log("info", "current provider: #{provider.inspect}")
-    tenants = provider.cloud_tenants
+    tenants = provider.tenant
     tenants.each { |tenant|
       $evm.log("info", "External Network: #{tenant.inspect}")
       $evm.log("info", "Found external_network: #{tenant.name}")
       list[tenant.ems_ref]="#{tenant.name} on #{provider.name}"
     }
   end
+}
+
+tenants = $evm.vmdb("cloud_tenants").all
+tenants.each { |tenant|
+  $evm.log("info", "Current tenant: #{tenant.inspect}")
 }
 
 # external_networks = $evm.vmdb("cloud_networks").all
