@@ -9,7 +9,7 @@ $evm.root.attributes.sort.each { |k, v| $evm.log("info", "Root:<$evm.root> Attri
 
 list = {}
 
-tenatns = $evm.vmdb("ext_management_system").all
+providers = $evm.vmdb("ext_management_system").all
 providers.each { |provider| 
   #$evm.log("info", "current provider: #{provider.inspect}")
   if provider.type == "ManageIQ::Providers::Openstack::NetworkManager"
