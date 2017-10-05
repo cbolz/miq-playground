@@ -14,7 +14,7 @@ if tenant_id.blank?
   list['unspecified']="select tenant first"
 else
   tenant = $evm.vmdb("cloud_tenant").find_by_id(tenant_id)
-  $evm.log("info", "Found tenant #{tenant.name} with ems_ref #{tenent.ems_ref} by ID #{tenant_id}")
+  $evm.log("info", "Found tenant #{tenant.name} with ems_ref #{tenant.ems_ref} by ID #{tenant_id}")
 
   provider = tenant.ext_management_system
   $evm.log("info", "Found provider #{provider.name} from tenant relationship")
