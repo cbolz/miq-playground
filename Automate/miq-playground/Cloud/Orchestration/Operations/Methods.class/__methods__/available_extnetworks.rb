@@ -15,7 +15,7 @@ if tenant_name.blank?
 else
   providers = $evm.vmdb("ext_management_system").all
   providers.each { |provider| 
-    $evm.log("info", "current provider: #{provider.inspect}")
+    #$evm.log("info", "current provider: #{provider.inspect}")
     if provider.type == "ManageIQ::Providers::Openstack::NetworkManager"
       $evm.log("info", "Provider #{provider.name} seems to be an OpenStack Network Provider, getting list of private networks aka external_networks...")
       $evm.log("info", "Hosts: #{provider.hosts}")
@@ -25,16 +25,17 @@ else
       end 
       external_networks = provider.cloud_networks
       external_networks.each { |external_network|
+        $evm.log("info", "External Network: #{external_network.inspect}")
         $evm.log("info", "Found external_network: #{external_network.name} with ID #{external_network.ems_ref}")
         list[external_network.ems_ref]="#{external_network.name} on #{provider.name}"
       }
     end
   }
 
-  external_networks = $evm.vmdb("cloud_networks").all
-  external_networks.each { |external_network|
-    $evm.log("info", "Finding cloud networks: #{external_network.inspect}")
-  }
+  # external_networks = $evm.vmdb("cloud_networks").all
+  # external_networks.each { |external_network|
+  #   $evm.log("info", "Finding cloud networks: #{external_network.inspect}")
+  # }
 end
 
 dialog_field = $evm.object 
