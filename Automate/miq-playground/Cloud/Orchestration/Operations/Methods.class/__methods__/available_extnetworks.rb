@@ -40,6 +40,19 @@ else
   external_networks = network.list_networks
   $evm.log("info", "External Networks from FOG: #{external_networks.body}")
 
+  networks = external_networks.body["networks"]
+  networks.each { |network|
+    $evm.log("info", "Current network: #{network.inspect}")
+    if network["provider:physical_network"] == "datacentre"
+      $evm.log("info", "This is a datacentre network")
+      if network["tenant_id"] == tenant.ems_ref
+        $evm.log("info", "Tenant ID matches, adding to list")
+        networkname = network["name"]
+        list[network["id"]]="#{networkname} on Provider #{provider.name}"
+      end 
+    end 
+  }
+
   # external_networks.each { |external_network|
   #   $evm.log("info", "Found external_network: #{external_network.name} with ID #{external_network.ems_ref}")
   #   if external_network.cloud_tenant.nil?
