@@ -26,10 +26,11 @@ else
   require 'fog/openstack'
 
   credentials={
+    :provider => "OpenStack",
     :openstack_api_key => provider.authentication_password,
     :openstack_username => provider.authentication_userid,
     :openstack_auth_url => "http://#{provider.hostname}:#{provider.port}/v3/auth/tokens",
-    :openstack_project_name => tenant.ems_ref,
+    :openstack_project_name => tenant.name,
     :openstack_domain_name => provider.name
   }
 
