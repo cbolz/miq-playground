@@ -40,7 +40,7 @@ else
   subnets = network.list_subnets
   $evm.log("info", "External Networks from FOG: #{subnets.body}")
 
-  networks = subnets.body["networks"]
+  networks = subnets.body["subnets"]
   networks.each { |network|
     $evm.log("info", "Current network: #{network.inspect}")
     $evm.log("info", "Network is an external network, adding it to the list")
