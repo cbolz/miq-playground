@@ -14,7 +14,7 @@ if tenant_id.blank?
   list['unspecified']="select tenant first"
 else
   tenant = $evm.vmdb("cloud_tenant").find_by_id(tenant_id)
-  $evm.log("info", "Found tenant #{tenant.name} by ID #{tenant_id}")
+  $evm.log("info", "Found tenant #{tenant.inspect} by ID #{tenant_id}")
 
   provider = tenant.ext_management_system
   $evm.log("info", "Found provider #{provider.name} from tenant relationship")
@@ -23,8 +23,8 @@ else
   external_networks.each { |external_network|
     $evm.log("info", "External Network: #{external_network.inspect}")
     $evm.log("info", "Found external_network: #{external_network.name} with ID #{external_network.ems_ref} and cloud_tenant #{external_network.cloud_tenant.inspect}")
-    $evm.log("info", "Checking cloud_tenant from external_network: #{external_network.cloud_tenant.inspect}")
-    if external_network.cloud_tenant == tenant_id
+    $evm.log("info", "Checking cloud_tenant from external_network: #{external_network.cloud_tenant.id}")
+    if external_network.cloud_tenant.id == tenant_id
       $evm.log("info", "Adding network to dialog, tenant ID does match")
       list[external_network.ems_ref]="#{external_network.name} on #{provider.name}"
     else 
