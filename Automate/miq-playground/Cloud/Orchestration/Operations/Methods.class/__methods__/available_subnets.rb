@@ -15,11 +15,11 @@ tenant_id = $evm.root['dialog_tenant_id']
 if tenant_id.blank?
   list['unspecified']="select tenant first"
 else
-  tenants = $evm.vmdb("cloud_tenant").all 
-  tenants.each { |tenant|
-    $evm.log("info", "Tenant: #{tenant.inspect}")
+  subnets = $evm.vmdb("cloud_subnet").all 
+  subnets.each { |subnet|
+    $evm.log("info", "Tenant: #{subnet.inspect}")
   }
-  $evm.log("info", "Found tenant #{tenant.inspect}")
+  $evm.log("info", "Found tenant #{subnet.inspect}")
 end 
 
 cloud_network = nil
