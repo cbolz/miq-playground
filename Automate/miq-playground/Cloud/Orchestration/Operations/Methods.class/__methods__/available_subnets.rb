@@ -28,6 +28,8 @@ else
   cloud_networks = $evm.vmdb("cloud_network").all 
   cloud_networks.each { |cloud_network|
     $evm.log("info", "Cloud network: #{cloud_network.inspect}")
+    $evm.log("info", "CLoud network associated tenant: #{cloud_network.cloud_tenant.inspect}")
+    $evm.log("info", "CLoud network associated subnets: #{cloud_network.cloud_subnets.inspect}")
   }
 
 end 
