@@ -30,7 +30,7 @@ providers.each { |provider|
 }
 
 $evm.log("info", "Retrieving list of cloud tenants...")
-tenants = $evm.vmdb("cloud_tenants").all
+tenants = $evm.vmdb("cloud_tenant").all
 tenants.each { |tenant|
   $evm.log("info", "Current tenant: #{tenant.inspect}")
 }
