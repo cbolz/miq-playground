@@ -9,21 +9,19 @@ $evm.root.attributes.sort.each { |k, v| $evm.log("info", "Root:<$evm.root> Attri
 
 list = {}
 
-external_network_id = $evm.root['dialog_param_external_network_id']
+tenant_id = $evm.root['dialog_tenant_id']
 
 external_networks = $evm.vmdb("cloud_network").all
 
+tenant_id = $evm.root['dialog_tenant_id']
+if tenant_id.blank?
+  list['unspecified']="select tenant first"
+else
+  tenant = $evm.vmdb("cloud_tenant").find_by_id(tenant_id)
+  $evm.log("info", "Found tenant #{tenant.inspect} with ems_ref #{tenant.ems_ref} by ID #{tenant_id}")
+end 
+
 cloud_network = nil
-
-$evm.log("info", "Search for external network with ems_ref: #{external_network_id}")
-
-external_networks.each { |external_network|
-  $evm.log("info", "Checking external network: #{external_network.name}")
-  if external_network.ems_ref == external_network_id
-    cloud_network = external_network
-    break 
-  end 
-}
 
 if cloud_network.nil?
   $evm.log("info", "Failed to find selected network")
