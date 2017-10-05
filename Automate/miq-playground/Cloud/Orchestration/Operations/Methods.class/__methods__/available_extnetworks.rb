@@ -25,14 +25,12 @@ else
   require 'json'
   require 'fog/openstack'
 
-  $evm.log("info", "Provider: #{provider.inspect}")
-    
   # get the MAC address directly from OSP
   credentials={
     :provider => "OpenStack",
     :openstack_api_key => provider.authentication_password,
     :openstack_username => provider.authentication_userid,
-    :openstack_auth_url => "http://#{provider[:hostname]}:#{provider[:port]}/v2.0/tokens",
+    :openstack_auth_url => "http://#{provider.hostname}:#{provider.port}/v2.0/tokens",
     :openstack_tenant => tenant.ems_ref
   }
 
