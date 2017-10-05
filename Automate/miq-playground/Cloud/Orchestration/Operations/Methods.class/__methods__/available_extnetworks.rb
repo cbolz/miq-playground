@@ -9,33 +9,22 @@ $evm.root.attributes.sort.each { |k, v| $evm.log("info", "Root:<$evm.root> Attri
 
 list = {}
 
-tenant_name = $evm.root['dialog_tenant_name']
-if tenant_name.blank?
+tenant_id = $evm.root['dialog_tenant_name']
+if tenant_id.blank?
   list['unspecified']="select tenant first"
 else
-  providers = $evm.vmdb("ext_management_system").all
-  providers.each { |provider| 
-    #$evm.log("info", "current provider: #{provider.inspect}")
-    if provider.type == "ManageIQ::Providers::Openstack::NetworkManager"
-      $evm.log("info", "Provider #{provider.name} seems to be an OpenStack Network Provider, getting list of private networks aka external_networks...")
-      $evm.log("info", "Hosts: #{provider.hosts}")
-      if provider.hosts.length > 0 
-        $evm.log("info", "Providers returns more than one host, this must be an UnderCloud, skipping")
-        next
-      end 
-      external_networks = provider.cloud_networks
-      external_networks.each { |external_network|
-        $evm.log("info", "External Network: #{external_network.inspect}")
-        $evm.log("info", "Found external_network: #{external_network.name} with ID #{external_network.ems_ref} and cloud_tenant #{external_network.cloud_tenant.inspect}")
-        list[external_network.ems_ref]="#{external_network.name} on #{provider.name}"
-      }
-    end
-  }
+  tenant = $evm.vmdb("cloud_tenant").find_by_id(tenant_id)
+  $evm.log("info", "Found tenant #{tenant.name} by ID #{tenant_id}")
 
-  # external_networks = $evm.vmdb("cloud_networks").all
-  # external_networks.each { |external_network|
-  #   $evm.log("info", "Finding cloud networks: #{external_network.inspect}")
-  # }
+  provider = tenant.ext_management_system
+  $evm.log("info", "Found provider #{provider.name} from tenant relationship")
+
+  external_networks = provider.cloud_networks
+  external_networks.each { |external_network|
+    $evm.log("info", "External Network: #{external_network.inspect}")
+    $evm.log("info", "Found external_network: #{external_network.name} with ID #{external_network.ems_ref} and cloud_tenant #{external_network.cloud_tenant.inspect}")
+    list[external_network.ems_ref]="#{external_network.name} on #{provider.name}"
+  }
 end
 
 dialog_field = $evm.object 
