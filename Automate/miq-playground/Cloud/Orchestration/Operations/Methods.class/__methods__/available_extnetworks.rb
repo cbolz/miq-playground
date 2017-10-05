@@ -31,8 +31,10 @@ else
     end
   }
 
-  external_networks = $evm.vmdb("cloud_networks").where(:cloud_tenant => tenant_name)
-  $evm.log("info", "Finding cloud networks with tenant name #{tenant_name}: #{external_networks.inspect}")
+  external_networks = $evm.vmdb("cloud_networks").all
+  external_networks.each { |external_network|
+    $evm.log("info", "Finding cloud networks: #{external_network.inspect}")
+  }
 end
 
 dialog_field = $evm.object 
