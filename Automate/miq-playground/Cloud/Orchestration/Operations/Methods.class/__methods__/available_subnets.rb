@@ -9,8 +9,6 @@ $evm.root.attributes.sort.each { |k, v| $evm.log("info", "Root:<$evm.root> Attri
 
 list = {}
 
-tenant_id = $evm.root['dialog_tenant_id']
-
 external_networks = $evm.vmdb("cloud_network").all
 
 tenant_id = $evm.root['dialog_tenant_id']
@@ -18,7 +16,7 @@ if tenant_id.blank?
   list['unspecified']="select tenant first"
 else
   tenant = $evm.vmdb("cloud_tenant").find_by_id(tenant_id)
-  $evm.log("info", "Found tenant #{tenant.inspect} with ems_ref #{tenant.ems_ref} by ID #{tenant_id}")
+  $evm.log("info", "Found tenant #{tenant.inspect}")
 end 
 
 cloud_network = nil
