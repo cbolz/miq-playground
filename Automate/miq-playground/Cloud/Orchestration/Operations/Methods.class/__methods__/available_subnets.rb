@@ -20,12 +20,12 @@ else
     $evm.log("info", "Subnet: #{subnet.inspect}")
   }
 
-  tenants = $evm.vmdb("cloud_tenants").all 
+  tenants = $evm.vmdb("cloud_tenant").all 
   tenants.each { |tenant|
     $evm.log("info", "Tenant: #{tenant.inspect}")
   }
 
-  cloud_networks = $evm.vmdb("clouds_networks").all 
+  cloud_networks = $evm.vmdb("cloud_network").all 
   cloud_networks.each { |cloud_network|
     $evm.log("info", "Cloud network: #{cloud_network.inspect}")
   }
