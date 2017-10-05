@@ -9,13 +9,13 @@ $evm.root.attributes.sort.each { |k, v| $evm.log("info", "Root:<$evm.root> Attri
 
 list = {}
 
-external_network_id = $evm.root['dialog_param_external_network_id:']
+external_network_id = $evm.root['dialog_param_external_network_id']
 
 external_networks = $evm.vmdb("cloud_network").all
 
 cloud_network = nil
 
-$evm.log("info", "Search for external network with ems_ref #{external_network_id}")
+$evm.log("info", "Search for external network with ems_ref: #{external_network_id}")
 
 external_networks.each { |external_network|
   $evm.log("info", "External network: #{external_network.inspect}")
@@ -25,7 +25,7 @@ external_networks.each { |external_network|
   end 
 }
 
-$evm.log("info", "Found external_network #{external_network.inspect} by ems_ref #{external_network_id}")
+$evm.log("info", "Found external_network #{cloud_network.inspect} by ems_ref #{external_network_id}")
 
 #
 #
