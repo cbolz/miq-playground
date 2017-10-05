@@ -24,6 +24,8 @@ else
   require 'rest-client'
   require 'json'
   require 'fog/openstack'
+
+  $evm.log("info", "Provider: #{provider.inspect}")
     
   # get the MAC address directly from OSP
   credentials={
