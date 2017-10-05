@@ -11,7 +11,7 @@ list = {}
 
 external_network_id = $evm.root['dialog_param_external_network_id:']
 
-external_network = $evm.vmdb("cloud_networks").where(:ems_ref => external_network_id)
+external_network = $evm.vmdb("cloud_network").where(:ems_ref => external_network_id)
 
 $evm.log("info", "Found external_network #{external_network.inspect} by ems_ref #{external_network_id}")
 
