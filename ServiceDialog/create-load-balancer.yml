@@ -29,10 +29,20 @@
         required: false
         required_method: 
         required_method_options: {}
-        default_value: '99000000000002'
+        default_value: '101000000000023'
         values:
-        - - 99000000000002
-          - admin on OverCloud
+        - - 101000000000013
+          - admin on DED
+        - - 101000000000023
+          - Salih1 on DED
+        - - 101000000000011
+          - admin on DHA
+        - - 101000000000024
+          - erp on DHA
+        - - 101000000000038
+          - call01 on DHA
+        - - 101000000000039
+          - call02 on DHA
         values_method: 
         values_method_options: {}
         options:
@@ -48,7 +58,7 @@
         show_refresh_button: true
         load_values_on_init: true
         read_only: 
-        auto_refresh: true
+        auto_refresh: 
         trigger_auto_refresh: true
         visible: true
         type: DialogFieldDropDownList
@@ -189,48 +199,6 @@
       display_method_options: 
       position: 1
       dialog_fields:
-      - name: param_subnet_id
-        description: subnet on which the load balancer will be located
-        data_type: string
-        notes: 
-        notes_display: 
-        display: edit
-        display_method: 
-        display_method_options: {}
-        required: false
-        required_method: 
-        required_method_options: {}
-        default_value: unspecified
-        values:
-        - - unspecified
-          - select tenant first
-        values_method: 
-        values_method_options: {}
-        options:
-          :force_multi_value: false
-          :sort_by: :description
-          :sort_order: :ascending
-        label: Subnet
-        position: 0
-        validator_type: 
-        validator_rule: 
-        reconfigurable: true
-        dynamic: true
-        show_refresh_button: true
-        load_values_on_init: true
-        read_only: false
-        auto_refresh: true
-        trigger_auto_refresh: 
-        visible: true
-        type: DialogFieldDropDownList
-        resource_action:
-          action: 
-          resource_type: DialogField
-          ae_namespace: Cloud/Orchestration/Operations
-          ae_class: Methods
-          ae_instance: Available_Subnets
-          ae_message: 
-          ae_attributes: {}
       - name: param_external_network_id
         description: UUID of a Neutron external network
         data_type: string
@@ -253,6 +221,48 @@
           :sort_by: :description
           :sort_order: :ascending
         label: External Network
+        position: 0
+        validator_type: 
+        validator_rule: 
+        reconfigurable: true
+        dynamic: true
+        show_refresh_button: true
+        load_values_on_init: true
+        read_only: false
+        auto_refresh: true
+        trigger_auto_refresh: true
+        visible: true
+        type: DialogFieldDropDownList
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: Cloud/Orchestration/Operations
+          ae_class: Methods
+          ae_instance: Available_ExtNetworks
+          ae_message: 
+          ae_attributes: {}
+      - name: param_subnet_id
+        description: subnet on which the load balancer will be located
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: unspecified
+        values:
+        - - unspecified
+          - select external network first
+        values_method: 
+        values_method_options: {}
+        options:
+          :force_multi_value: false
+          :sort_by: :description
+          :sort_order: :ascending
+        label: Subnet
         position: 1
         validator_type: 
         validator_rule: 
@@ -262,7 +272,7 @@
         load_values_on_init: true
         read_only: false
         auto_refresh: true
-        trigger_auto_refresh: false
+        trigger_auto_refresh: 
         visible: true
         type: DialogFieldDropDownList
         resource_action:
@@ -270,7 +280,7 @@
           resource_type: DialogField
           ae_namespace: Cloud/Orchestration/Operations
           ae_class: Methods
-          ae_instance: Available_ExtNetworks
+          ae_instance: Available_Subnets
           ae_message: 
           ae_attributes: {}
       - name: param_protocol_port
