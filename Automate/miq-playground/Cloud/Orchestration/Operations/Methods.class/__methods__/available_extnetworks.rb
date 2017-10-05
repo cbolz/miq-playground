@@ -14,15 +14,14 @@ if tenant_id.blank?
   list['unspecified']="select tenant first"
 else
   tenant = $evm.vmdb("cloud_tenant").find_by_id(tenant_id)
-  $evm.log("info", "Found tenant #{tenant.inspect} by ID #{tenant_id}")
+  $evm.log("info", "Found tenant #{tenant.name} by ID #{tenant_id}")
 
   provider = tenant.ext_management_system
   $evm.log("info", "Found provider #{provider.name} from tenant relationship")
 
   external_networks = provider.cloud_networks
   external_networks.each { |external_network|
-    $evm.log("info", "External Network: #{external_network.inspect}")
-    $evm.log("info", "Found external_network: #{external_network.name} with ID #{external_network.ems_ref} and cloud_tenant #{external_network.cloud_tenant.inspect}")
+    $evm.log("info", "Found external_network: #{external_network.name} with ID #{external_network.ems_ref}")
     if external_network.cloud_tenant.nil?
       $evm.log("info", "This network does not have a tenant, ignoring it")
     else 
