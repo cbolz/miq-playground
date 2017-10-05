@@ -23,7 +23,7 @@ else
 
   require 'rest-client'
   require 'json'
-  require 'fog'
+  require 'fog/openstack'
     
   # get the MAC address directly from OSP
   credentials={
