@@ -11,14 +11,15 @@ list = {}
 
 providers = $evm.vmdb("ext_management_system").all
 providers.each { |provider| 
-  #$evm.log("info", "current provider: #{provider.inspect}")
   if provider.type == "ManageIQ::Providers::Openstack::NetworkManager"
-    $evm.log("info", "Provider #{provider.name} seems to be an OpenStack Network Provider, getting list of private networks aka external_networks...")
+    $evm.log("info", "Provider #{provider.name} seems to be an OpenStack Network Provider, getting list tenants...")
     $evm.log("info", "Hosts: #{provider.hosts}")
     if provider.hosts.length > 0 
       $evm.log("info", "Providers returns more than one host, this must be an UnderCloud, skipping")
       next
     end 
+
+    $evm.log("info", "current provider: #{provider.inspect}")
     tenants = provider.cloud_tenants
     tenants.each { |tenant|
       $evm.log("info", "External Network: #{tenant.inspect}")
