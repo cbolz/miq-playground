@@ -14,6 +14,9 @@ tenants = $evm.vmdb("cloud_tenant").all
 tenants.each { |tenant|
   $evm.log("info", "Current tenant: #{tenant.inspect}")
   provider = tenant.ext_management_system
+  if provider.nil?
+    $evm.log("info", "Tenant does not have an ext_management_system relationship")
+  end 
   $evm.log("info", "Tenant on provider #{provider.name}")
   list[tenant.id]="#{tenant.name} on #{provider.name}"
 }
