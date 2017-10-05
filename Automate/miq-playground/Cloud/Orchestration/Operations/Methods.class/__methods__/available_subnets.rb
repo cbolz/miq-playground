@@ -20,12 +20,8 @@ else
   $evm.log("info", "Found provider #{provider.name} from tenant relationship")
 
   $evm.log("info", "current provider: #{provider.inspect}")
-  if provider.type == "ManageIQ::Providers::Openstack::NetworkManager"
-    $evm.log("info", "Provider #{provider.name} seems to be an OpenStack Network Provider")
-    $evm.log("info", "Hosts: #{provider.hosts}")
-    if provider.hosts.length > 0 
-      $evm.log("info", "Providers returns more than one host, this must be an UnderCloud, skipping") 
-    end 
+  if provider.type == "ManageIQ::Providers::Openstack::CloudManager"
+    $evm.log("info", "Provider #{provider.name} seems to be an OpenStack Provider")
 
     $evm.log("info", "getting list of private networks aka subnets...")
     subnets = provider.cloud_subnets
