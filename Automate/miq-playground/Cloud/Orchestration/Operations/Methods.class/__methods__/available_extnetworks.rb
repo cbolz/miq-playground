@@ -34,8 +34,6 @@ else
     :openstack_domain_name => provider.name
   }
 
-  $evm.log("info", "Credentials: #{credentials.inspect}")
-
   network = Fog::Network.new(credentials)
   external_networks = network.list_networks
   $evm.log("info", "External Networks from FOG: #{external_networks.body}")

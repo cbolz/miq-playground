@@ -47,6 +47,7 @@ else
     networkname = network["name"]
     list[network["id"]]="#{networkname} on Provider #{provider.name}"
   }
+end 
 
 # external_networks = $evm.vmdb("cloud_network").all
 
