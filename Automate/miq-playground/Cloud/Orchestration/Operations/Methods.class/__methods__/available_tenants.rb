@@ -2,7 +2,7 @@
 # Description: provide the dynamic list content from available tenants
 #
 
-$evm.instantiate('/Discovery/ObjectWalker/object_walker')
+#$evm.instantiate('/Discovery/ObjectWalker/object_walker')
 
 # Dump all of root's attributes to the log
 $evm.root.attributes.sort.each { |k, v| $evm.log("info", "Root:<$evm.root> Attribute - #{k}: #{v}")}
@@ -20,12 +20,12 @@ providers.each { |provider|
     end 
 
     $evm.log("info", "current provider: #{provider.inspect}")
-    tenants = provider.tenant
-    tenants.each { |tenant|
-      $evm.log("info", "External Network: #{tenant.inspect}")
-      $evm.log("info", "Found external_network: #{tenant.name}")
-      list[tenant.ems_ref]="#{tenant.name} on #{provider.name}"
-    }
+    # tenants = provider.tenant
+    # tenants.each { |tenant|
+    #   $evm.log("info", "External Network: #{tenant.inspect}")
+    #   $evm.log("info", "Found external_network: #{tenant.name}")
+    #   list[tenant.ems_ref]="#{tenant.name} on #{provider.name}"
+    # }
   end
 }
 

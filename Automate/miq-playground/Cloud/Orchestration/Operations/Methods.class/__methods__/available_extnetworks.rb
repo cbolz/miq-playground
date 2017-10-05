@@ -2,7 +2,7 @@
 # Description: provide the dynamic list content from external networks
 #
 
-$evm.instantiate('/Discovery/ObjectWalker/object_walker')
+#$evm.instantiate('/Discovery/ObjectWalker/object_walker')
 
 # Dump all of root's attributes to the log
 $evm.root.attributes.sort.each { |k, v| $evm.log("info", "Root:<$evm.root> Attribute - #{k}: #{v}")}
