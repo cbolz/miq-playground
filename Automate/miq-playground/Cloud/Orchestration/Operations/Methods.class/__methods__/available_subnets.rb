@@ -1,5 +1,5 @@
 #
-# Description: provide the dynamic list content from available subnets
+# Description: provide the dynamic list content from available tenants
 #
 
 #$evm.instantiate('/Discovery/ObjectWalker/object_walker')
@@ -17,9 +17,19 @@ if tenant_id.blank?
 else
   subnets = $evm.vmdb("cloud_subnet").all 
   subnets.each { |subnet|
-    $evm.log("info", "Tenant: #{subnet.inspect}")
+    $evm.log("info", "Subnet: #{subnet.inspect}")
   }
-  $evm.log("info", "Found tenant #{subnet.inspect}")
+
+  tenants = $evm.vmdb("cloud_tenants").all 
+  tenants.each { |tenant|
+    $evm.log("info", "Tenant: #{tenant.inspect}")
+  }
+
+  cloud_networks = $evm.vmdb("clouds_networks").all 
+  cloud_networks.each { |cloud_network|
+    $evm.log("info", "Cloud network: #{cloud_network.inspect}")
+  }
+
 end 
 
 cloud_network = nil
@@ -30,7 +40,7 @@ if cloud_network.nil?
 else 
   $evm.log("info", "Found external_network #{cloud_network.inspect} by ems_ref #{external_network_id}")
 
-  cloud_network.cloud_subnets.each { |subnet|
+  cloud_network.cloud_tenants.each { |subnet|
     $evm.log("info", "Adding subnet: #{subnet.name} with ems_ref #{subnet.ems_ref}")
     list[subnet.ems_ref]="#{subnet.name}"
   }
