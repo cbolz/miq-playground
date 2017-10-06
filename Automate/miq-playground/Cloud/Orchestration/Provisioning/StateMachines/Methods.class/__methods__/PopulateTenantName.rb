@@ -9,9 +9,11 @@ $evm.root.attributes.sort.each { |k, v| $evm.log("info", "Root:<$evm.root> Attri
 
 prov = $evm.root['service_template_provision_task']
 
+service_template_provision_task
+
 $evm.log("info", "Provisioning object: #{prov.inspect}")
 
-tenant_id = prov.get_option("dialog_tenant_id")
+tenant_id = $evm.root["dialog_tenant_id"]
 
 # find tenant by ID
 if tenant_id.blank?
@@ -19,7 +21,10 @@ if tenant_id.blank?
 else
     tenant = $evm.vmdb("cloud_tenant").find_by_id(tenant_id)
     $evm.log("info", "Found tenant by ID #{tenant_id}: #{tenant.inspect}")
-
+    $evm.log("info", "Store dialog_tenant_name and tenant_name with value #{tenant.name}")
     prov.set_option("dialog_tenant_name", "#{tenant.name}")
     prov.set_option("tenant_name", "#{tenant.name}")
 end
+
+
+[----] I, [2017-10-06T08:27:22.372562 #27550:72a93a4]  INFO -- : Q-task_id([service_template_provision_task_101000000000136]) <AEMethod object_walker> object_walker#3B22C368:[2] $evm.root['service_template_provision_task'].get_dialog_option
