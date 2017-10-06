@@ -9,7 +9,8 @@ list = {}
 
 #tenant_id = $evm.root['dialog_tenant_id']
 tenant_name = $evm.root["dialog_tenant_name"]
-if tenant_id.blank?
+
+if tenant_name.blank?
   list['unspecified']="select tenant first"
 else
   # tenant = $evm.vmdb("cloud_tenant").find_by_id(tenant_id)
