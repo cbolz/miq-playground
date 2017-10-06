@@ -2,8 +2,6 @@
 # Description: provide the dynamic list content from external networks
 #
 
-$evm.instantiate('/Discovery/ObjectWalker/object_walker')
-
 # Dump all of root's attributes to the log
 $evm.root.attributes.sort.each { |k, v| $evm.log("info", "Root:<$evm.root> Attribute - #{k}: #{v}")}
 
@@ -17,6 +15,10 @@ else
   # tenant = $evm.vmdb("cloud_tenant").find_by_id(tenant_id)
   # $evm.log("info", "Found tenant #{tenant.name} with ems_ref #{tenant.ems_ref} by ID #{tenant_id}")
 
+  $evm.root["cjung_service_resources"]=$evm.root['service_template'].service_resources
+  $evm.root["cjung_service_tenant"}=$evm.root['service_template'].tenant
+  $evm.instantiate('/Discovery/ObjectWalker/object_walker')
+  
   provider = tenant.ext_management_system
   $evm.log("info", "Found provider #{provider.name} from tenant relationship")
 
