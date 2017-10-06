@@ -9,8 +9,6 @@ $evm.root.attributes.sort.each { |k, v| $evm.log("info", "Root:<$evm.root> Attri
 
 prov = $evm.root['service_template_provision_task']
 
-service_template_provision_task
-
 $evm.log("info", "Provisioning object: #{prov.inspect}")
 
 tenant_id = $evm.root["dialog_tenant_id"]
