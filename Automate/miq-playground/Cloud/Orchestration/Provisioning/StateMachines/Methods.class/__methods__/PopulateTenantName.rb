@@ -22,4 +22,5 @@ else
     $evm.log("info", "Store dialog_tenant_name and tenant_name with value #{tenant.name}")
     prov.set_option("dialog_tenant_name", "#{tenant.name}")
     prov.set_option("tenant_name", "#{tenant.name}")
+    prov.set_option("tenant_id", tenant.id)
 end
