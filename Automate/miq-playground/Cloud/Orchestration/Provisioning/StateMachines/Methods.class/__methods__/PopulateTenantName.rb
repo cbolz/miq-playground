@@ -15,7 +15,7 @@ tenant_id = prov.get_option("dialog_tenant_id")
 
 # find tenant by ID
 if tenant_id.blank?
-    list['unspecified']="select tenant first"
+    $evm.log("in", "could not find tenant")
 else
     tenant = $evm.vmdb("cloud_tenant").find_by_id(tenant_id)
     $evm.log("info", "Found tenant by ID #{tenant_id}: #{tenant.inspect}")
