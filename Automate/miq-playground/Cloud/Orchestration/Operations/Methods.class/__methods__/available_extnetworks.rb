@@ -16,7 +16,7 @@ else
   # $evm.log("info", "Found tenant #{tenant.name} with ems_ref #{tenant.ems_ref} by ID #{tenant_id}")
 
   $evm.root["cjung_service_resources"]=$evm.root['service_template'].service_resources
-  $evm.root["cjung_service_tenant"}=$evm.root['service_template'].tenant
+  $evm.root["cjung_service_tenant"]=$evm.root['service_template'].tenant
   $evm.instantiate('/Discovery/ObjectWalker/object_walker')
   
   provider = tenant.ext_management_system
