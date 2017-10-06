@@ -9,6 +9,7 @@ list = {}
 
 #tenant_id = $evm.root['dialog_tenant_id']
 tenant_name = $evm.root["dialog_tenant_name"]
+provider = nil
 
 if tenant_name.blank?
   list['unspecified']="select tenant first"
@@ -18,15 +19,16 @@ else
 
   counter=0
   $evm.root['service_template'].service_resources.each { |resource|
+    if resource.resource_type == "ExtManagementSystem"
+      $evm.log("info", "This resource is a provider: #{resource.name}")
+      provider = resource
+      break
+    end 
     $evm.root["cjung_service_resources_#{counter}"]=resource
     counter+=1
   }
-  $evm.root["cjung_service_tenant"]=$evm.root['service_template'].tenant
   $evm.instantiate('/Discovery/ObjectWalker/object_walker')
   
-  provider = tenant.ext_management_system
-  $evm.log("info", "Found provider #{provider.name} from tenant relationship")
-
   external_networks = provider.cloud_networks
 
   require 'rest-client'
