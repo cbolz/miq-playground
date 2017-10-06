@@ -44,16 +44,16 @@ else
   subnets = network.list_subnets
   $evm.log("info", "External Networks from FOG: #{subnets.body}")
 
-  tenant_ems_ref = $evm.vmdb("cloud_tenant").find_by_name(tenant_name)
-  if tenant_ems_ref.nil?
-    $evm.log("info", "Unable to find tenant by name #{tenant_name}")
+  tenant = $evm.vmdb("cloud_tenant").find_by_name(tenant_name)
+  if tenant.nil?
+    $evm.log("info", "Unable to find tenant by name #{tenant_name}: #{tenant.inspect}")
   end 
 
   networks = subnets.body["subnets"]
   networks.each { |network|
     $evm.log("info", "Current network: #{network.inspect}")
-    if network["tenant_id"]==tenant_ems_ref
-      $evm.log("info", "Network is an external network, adding it to the list")
+    if network["tenant_id"]==tenant.ems_ref
+      $evm.log("info", "Network is an external network in the proper tenant, adding it to the list")
       networkname = network["name"]
       list[network["id"]]="#{networkname} on Provider #{provider.name}"
     end
