@@ -7,7 +7,7 @@ $evm.instantiate('/Discovery/ObjectWalker/object_walker')
 # Dump all of root's attributes to the log
 $evm.root.attributes.sort.each { |k, v| $evm.log("info", "Root:<$evm.root> Attribute - #{k}: #{v}")}
 
-prov = @handle.root['service_template_provision_task']
+prov = $evm.root['service_template_provision_task']
 
 $evm.log("info", "Provisioning object: #{prov.inspect}")
 
