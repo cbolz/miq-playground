@@ -24,6 +24,7 @@ else
     prov.set_option("tenant_name", "#{tenant.name}")
     $evm.log("info", "Store tenant ID #{tenant.id} in tenant_id")
     prov.set_option("tenant_id", tenant.id)
+    prov.tenant_id=tenant.id
 
     $evm.log("info", "Provisioning object after modifications: #{prov.inspect}")
 end
