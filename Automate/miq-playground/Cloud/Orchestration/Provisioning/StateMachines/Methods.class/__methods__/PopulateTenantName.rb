@@ -31,6 +31,4 @@ else
         $evm.log("info", "setting tenant_name")
         $evm.root['service_template_provision_task'].options[:dialog]["tenant_name"]="#{tenant.name}"
     end 
-    
-#    $evm.log("info", "Provisioning object after modifications: #{prov.inspect}")
 end
