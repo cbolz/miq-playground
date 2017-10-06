@@ -21,7 +21,7 @@ else
   $evm.root['service_template'].service_resources.each { |resource|
     $evm.log("info", "Resource: #{resource.inspect}")
     if resource.resource_type == "ExtManagementSystem"
-      $evm.log("info", "This resource is a provider: #{resource.resource.name}")
+      $evm.log("info", "This resource is a provider: #{resource.inspect}")
       provider = resource.resource
       break
     end 
