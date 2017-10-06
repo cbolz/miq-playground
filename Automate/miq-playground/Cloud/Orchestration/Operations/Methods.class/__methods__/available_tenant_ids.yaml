@@ -3,7 +3,7 @@ object_type: method
 version: 1.0
 object:
   attributes:
-    name: Available_Tenants
+    name: Available_Tenant_IDs
     display_name: 
     description: 
     scope: instance
