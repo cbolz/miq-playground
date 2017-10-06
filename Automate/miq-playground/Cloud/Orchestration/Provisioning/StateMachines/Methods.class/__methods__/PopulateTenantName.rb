@@ -25,6 +25,3 @@ else
     prov.set_option("dialog_tenant_name", "#{tenant.name}")
     prov.set_option("tenant_name", "#{tenant.name}")
 end
-
-
-[----] I, [2017-10-06T08:27:22.372562 #27550:72a93a4]  INFO -- : Q-task_id([service_template_provision_task_101000000000136]) <AEMethod object_walker> object_walker#3B22C368:[2] $evm.root['service_template_provision_task'].get_dialog_option
