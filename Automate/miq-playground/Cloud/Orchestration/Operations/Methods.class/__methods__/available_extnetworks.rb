@@ -2,19 +2,20 @@
 # Description: provide the dynamic list content from external networks
 #
 
-#$evm.instantiate('/Discovery/ObjectWalker/object_walker')
+$evm.instantiate('/Discovery/ObjectWalker/object_walker')
 
 # Dump all of root's attributes to the log
 $evm.root.attributes.sort.each { |k, v| $evm.log("info", "Root:<$evm.root> Attribute - #{k}: #{v}")}
 
 list = {}
 
-tenant_id = $evm.root['dialog_tenant_id']
+#tenant_id = $evm.root['dialog_tenant_id']
+tenant_name = $evm.root["dialog_tenant_name"]
 if tenant_id.blank?
   list['unspecified']="select tenant first"
 else
-  tenant = $evm.vmdb("cloud_tenant").find_by_id(tenant_id)
-  $evm.log("info", "Found tenant #{tenant.name} with ems_ref #{tenant.ems_ref} by ID #{tenant_id}")
+  # tenant = $evm.vmdb("cloud_tenant").find_by_id(tenant_id)
+  # $evm.log("info", "Found tenant #{tenant.name} with ems_ref #{tenant.ems_ref} by ID #{tenant_id}")
 
   provider = tenant.ext_management_system
   $evm.log("info", "Found provider #{provider.name} from tenant relationship")
@@ -30,7 +31,7 @@ else
     :openstack_api_key => provider.authentication_password,
     :openstack_username => provider.authentication_userid,
     :openstack_auth_url => "http://#{provider.hostname}:#{provider.port}/v3/auth/tokens",
-    :openstack_project_name => tenant.name,
+    :openstack_project_name => tenant_name,
     :openstack_domain_name => provider.name
   }
 
