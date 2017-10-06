@@ -20,8 +20,17 @@ else
     tenant = $evm.vmdb("cloud_tenant").find_by_id(tenant_id)
     $evm.log("info", "Found tenant by ID #{tenant_id}: #{tenant.inspect}")
     $evm.log("info", "Store dialog_tenant_name and tenant_name with value #{tenant.name}")
-    prov.set_option("dialog_tenant_name", "#{tenant.name}")
-    prov.set_option("tenant_name", "#{tenant.name}")
+    #prov.set_option("dialog_tenant_name", "#{tenant.name}")
+    #prov.set_option("tenant_name", "#{tenant.name}")
 
-    $evm.log("info", "Provisioning object after modifications: #{prov.inspect}")
+    if $evm.root['service_template_provision_task'].options[:dialog]["dialog_tenant_name"].nil?
+        $evm.log("info", "setting dialog_tenant_name")
+        $evm.root['service_template_provision_task'].options[:dialog]["dialog_tenant_name"]="#{tenant.name}"
+    end
+    if $evm.root['service_template_provision_task'].options[:dialog]["tenant_name"].nil?
+        $evm.log("info", "setting tenant_name")
+        $evm.root['service_template_provision_task'].options[:dialog]["tenant_name"]="#{tenant.name}"
+    end 
+    
+#    $evm.log("info", "Provisioning object after modifications: #{prov.inspect}")
 end
