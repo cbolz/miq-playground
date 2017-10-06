@@ -1,5 +1,5 @@
 #
-# Description: provide the dynamic list content from available subnets
+# Description: provide the dynamic list content from available tenants
 #
 
 #$evm.instantiate('/Discovery/ObjectWalker/object_walker')
@@ -14,27 +14,81 @@ if tenant_id.blank?
   list['unspecified']="select tenant first"
 else
   tenant = $evm.vmdb("cloud_tenant").find_by_id(tenant_id)
-  $evm.log("info", "Found tenant #{tenant.name} by ID #{tenant_id}")
+  $evm.log("info", "Found tenant #{tenant.name} with ems_ref #{tenant.ems_ref} by ID #{tenant_id}")
 
   provider = tenant.ext_management_system
   $evm.log("info", "Found provider #{provider.name} from tenant relationship")
 
-  $evm.log("info", "current provider: #{provider.inspect}")
-  if provider.type == "ManageIQ::Providers::Openstack::NetworkManager"
-    $evm.log("info", "Provider #{provider.name} seems to be an OpenStack Network Provider")
-    $evm.log("info", "Hosts: #{provider.hosts}")
-    if provider.hosts.length > 0 
-      $evm.log("info", "Providers returns more than one host, this must be an UnderCloud, skipping") 
-    end 
+  external_networks = provider.cloud_networks
 
-    $evm.log("info", "getting list of private networks aka subnets...")
-    subnets = provider.cloud_subnets
-    subnets.each { |subnet|
-      $evm.log("info", "Found Subnet: #{subnet.name} with ID #{subnet.ems_ref} and details: #{subnet.inspect}")
-      list[subnet.ems_ref]="#{subnet.name} on #{provider.name}"
-    }
-  end
+  require 'rest-client'
+  require 'json'
+  require 'fog/openstack'
+
+  credentials={
+    :provider => "OpenStack",
+    :openstack_api_key => provider.authentication_password,
+    :openstack_username => provider.authentication_userid,
+    :openstack_auth_url => "http://#{provider.hostname}:#{provider.port}/v3/auth/tokens",
+    :openstack_project_name => tenant.name,
+    :openstack_domain_name => provider.name
+  }
+
+  $evm.log("info", "Credentials: #{credentials.inspect}")
+
+  network = Fog::Network.new(credentials)
+  subnets = network.list_subnets
+  $evm.log("info", "External Networks from FOG: #{subnets.body}")
+
+  networks = subnets.body["subnets"]
+  networks.each { |network|
+    $evm.log("info", "Current network: #{network.inspect}")
+    if network["tenant_id"]==tenant.ems_ref
+      $evm.log("info", "Network is an external network, adding it to the list")
+      networkname = network["name"]
+      list[network["id"]]="#{networkname} on Provider #{provider.name}"
+    end
+  }
 end 
+
+# external_networks = $evm.vmdb("cloud_network").all
+
+# tenant_id = $evm.root['dialog_tenant_id']
+# if tenant_id.blank?
+#   list['unspecified']="select tenant first"
+# else
+#   subnets = $evm.vmdb("cloud_subnet").all 
+#   subnets.each { |subnet|
+#     $evm.log("info", "Subnet: #{subnet.inspect}")
+#   }
+
+#   tenants = $evm.vmdb("cloud_tenant").all 
+#   tenants.each { |tenant|
+#     $evm.log("info", "Tenant: #{tenant.inspect}")
+#   }
+
+#   cloud_networks = $evm.vmdb("cloud_network").all 
+#   cloud_networks.each { |cloud_network|
+#     $evm.log("info", "Cloud network: #{cloud_network.inspect}")
+#     $evm.log("info", "CLoud network associated tenant: #{cloud_network.cloud_tenant.inspect}")
+#     $evm.log("info", "CLoud network associated subnets: #{cloud_network.cloud_subnets.inspect}")
+#   }
+
+# end 
+
+# cloud_network = nil
+
+# if cloud_network.nil?
+#   $evm.log("info", "Failed to find selected network")
+#   list['unspecified']="select external network first"
+# else 
+#   $evm.log("info", "Found external_network #{cloud_network.inspect} by ems_ref #{external_network_id}")
+
+#   cloud_network.cloud_tenants.each { |subnet|
+#     $evm.log("info", "Adding subnet: #{subnet.name} with ems_ref #{subnet.ems_ref}")
+#     list[subnet.ems_ref]="#{subnet.name}"
+#   }
+# end 
 
 dialog_field = $evm.object 
 
