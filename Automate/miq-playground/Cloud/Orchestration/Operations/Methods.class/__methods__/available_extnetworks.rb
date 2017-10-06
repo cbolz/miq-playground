@@ -19,6 +19,7 @@ else
 
   counter=0
   $evm.root['service_template'].service_resources.each { |resource|
+    $evm.log("info", "Resource: #{resource.inspect}")
     if resource.resource_type == "ExtManagementSystem"
       $evm.log("info", "This resource is a provider: #{resource.name}")
       provider = resource
@@ -27,7 +28,7 @@ else
     $evm.root["cjung_service_resources_#{counter}"]=resource
     counter+=1
   }
-  $evm.instantiate('/Discovery/ObjectWalker/object_walker')
+  #$evm.instantiate('/Discovery/ObjectWalker/object_walker')
   
   external_networks = provider.cloud_networks
 
