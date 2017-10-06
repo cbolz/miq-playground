@@ -16,7 +16,11 @@ else
   # tenant = $evm.vmdb("cloud_tenant").find_by_id(tenant_id)
   # $evm.log("info", "Found tenant #{tenant.name} with ems_ref #{tenant.ems_ref} by ID #{tenant_id}")
 
-  $evm.root["cjung_service_resources"]=$evm.root['service_template'].service_resources
+  counter=0
+  $evm.root['service_template'].service_resources.each { |resource|
+    $evm.root["cjung_service_resources_#{counter}"]=resource
+    counter+=1
+  }
   $evm.root["cjung_service_tenant"]=$evm.root['service_template'].tenant
   $evm.instantiate('/Discovery/ObjectWalker/object_walker')
   
