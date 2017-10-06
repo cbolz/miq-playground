@@ -7,17 +7,13 @@ $evm.root.attributes.sort.each { |k, v| $evm.log("info", "Root:<$evm.root> Attri
 
 list = {}
 
-#tenant_id = $evm.root['dialog_tenant_id']
 tenant_name = $evm.root["dialog_tenant_name"]
 provider = nil
 
 if tenant_name.blank?
   list['unspecified']="select tenant first"
 else
-  # tenant = $evm.vmdb("cloud_tenant").find_by_id(tenant_id)
-  # $evm.log("info", "Found tenant #{tenant.name} with ems_ref #{tenant.ems_ref} by ID #{tenant_id}")
-
-  counter=0
+  # try to find the provider object from the service template
   $evm.root['service_template'].service_resources.each { |resource|
     $evm.log("info", "Resource: #{resource.inspect}")
     if resource.resource_type == "ExtManagementSystem"
@@ -25,10 +21,7 @@ else
       provider = resource.resource
       break
     end 
-    $evm.root["cjung_service_resources_#{counter}"]=resource
-    counter+=1
   }
-  #$evm.instantiate('/Discovery/ObjectWalker/object_walker')
   
   external_networks = provider.cloud_networks
 
@@ -58,21 +51,6 @@ else
       list[network["id"]]="#{networkname} on Provider #{provider.name}"
     end 
   }
-
-  # external_networks.each { |external_network|
-  #   $evm.log("info", "Found external_network: #{external_network.name} with ID #{external_network.ems_ref}")
-  #   if external_network.cloud_tenant.nil?
-  #     $evm.log("info", "This network does not have a tenant, ignoring it")
-  #   else 
-  #     $evm.log("info", "Checking cloud_tenant from external_network: #{external_network.cloud_tenant.id.inspect} and tenant ID from dialog: #{tenant_id.inspect}")      
-  #     if external_network.cloud_tenant.id.to_i == tenant_id.to_i
-  #       $evm.log("info", "Adding network to dialog, tenant ID does match")
-  #       list[external_network.ems_ref]="#{external_network.name} on #{provider.name}"
-  #     else 
-  #       $evm.log("info", "Ignoring network since tenant ID doesn't match")
-  #     end 
-  #   end 
-  # }
 end
 
 dialog_field = $evm.object 
