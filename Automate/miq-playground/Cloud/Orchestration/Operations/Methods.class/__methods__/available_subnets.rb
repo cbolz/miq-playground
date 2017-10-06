@@ -34,7 +34,7 @@ else
     :openstack_api_key => provider.authentication_password,
     :openstack_username => provider.authentication_userid,
     :openstack_auth_url => "http://#{provider.hostname}:#{provider.port}/v3/auth/tokens",
-    :openstack_project_name => tenant.name,
+    :openstack_project_name => tenant_name,
     :openstack_domain_name => provider.name
   }
 
@@ -44,10 +44,15 @@ else
   subnets = network.list_subnets
   $evm.log("info", "External Networks from FOG: #{subnets.body}")
 
+  tenant_ems_ref = $evm.vmdb("cloud_tenant").find_by_name(tenant_name)
+  if tenant_ems_ref.nil?
+    $evm.log("info", "Unable to find tenant by name #{tenant_name}")
+  end 
+
   networks = subnets.body["subnets"]
   networks.each { |network|
     $evm.log("info", "Current network: #{network.inspect}")
-    if network["tenant_id"]==tenant.ems_ref
+    if network["tenant_id"]==tenant_ems_ref
       $evm.log("info", "Network is an external network, adding it to the list")
       networkname = network["name"]
       list[network["id"]]="#{networkname} on Provider #{provider.name}"
