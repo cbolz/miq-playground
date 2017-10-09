@@ -33,7 +33,7 @@ begin
   
     #tenant = parsed_dialog_information[:]
    
-    rc=system("u - clouduser -c /home/clouduser/add_host_v2.sh &> /tmp/add_host.log")
+    rc=system("su - clouduser -c /home/clouduser/add_host_v2.sh &> /tmp/add_host.log")
     $evm.log("info", "Return Code: #{rc.inspect}")
     if rc != true
         exit MIQ_ABORT
