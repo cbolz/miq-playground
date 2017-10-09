@@ -15,6 +15,6 @@ object:
   - pre2:
       value: "/Service/Provisioning/StateMachines/Methods/CatalogItemInitialization"
   - provision:
-      value: "/Integratoin/OpenShift/Methods/add_node"
+      value: "/Integration/OpenShift/Methods/add_node"
   - checkprovisioned:
       value: "#"
