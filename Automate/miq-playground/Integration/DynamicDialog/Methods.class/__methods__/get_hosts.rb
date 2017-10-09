@@ -32,7 +32,7 @@ begin
         $evm.log("info", "User selected provider #{ems.name}: #{ems.inspect}")
         ems.vms.each { |vm|
             $evm.log("info", "Adding Host with ID #{vm.id} and name #{vm.name}")
-            list[vm.id]=vm.name if vm.name =~ /^node/
+            list[vm.name]=vm.name if vm.name =~ /^node/
         }
     end 
 
