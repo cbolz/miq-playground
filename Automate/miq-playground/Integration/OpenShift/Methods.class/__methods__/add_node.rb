@@ -34,7 +34,7 @@ begin
     #tenant = parsed_dialog_information[:]
    
     rc=system("/root/add_host_v2.sh &> /tmp/add_host.log")
-    $evm.log("info", "Return Code: #{rc}")
+    $evm.log("info", "Return Code: #{rc.inspect}")
 
     #
     # Exit method
