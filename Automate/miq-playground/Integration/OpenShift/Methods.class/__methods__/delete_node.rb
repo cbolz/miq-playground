@@ -23,7 +23,8 @@ begin
   
     nodename = $evm.root["dialog_nodename"]
 
-    rc=system("su - clouduser -c /home/clouduser/delete_host.sh #{nodename} &> /tmp/delete.log")
+    $evm.log("info", "su - clouduser -c '/home/clouduser/delete_host.sh #{nodename}' &> /tmp/delete.log")
+    rc=system("su - clouduser -c '/home/clouduser/delete_host.sh #{nodename}' &> /tmp/delete.log")
     $evm.log("info", "Return Code: #{rc.inspect}")
 
     if rc != true
