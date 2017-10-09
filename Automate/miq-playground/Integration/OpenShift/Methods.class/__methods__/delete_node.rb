@@ -24,6 +24,10 @@ begin
     rc=system("/root/delete_host.sh &> /tmp/delete.log")
     $evm.log("info", "Return Code: #{rc.inspect}")
 
+    if rc != true
+        exit MIQ_ABORT
+    end 
+
     #
     # Exit method
     #

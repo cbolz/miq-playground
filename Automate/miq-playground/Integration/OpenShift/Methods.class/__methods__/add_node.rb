@@ -35,6 +35,9 @@ begin
    
     rc=system("/root/add_host_v2.sh &> /tmp/add_host.log")
     $evm.log("info", "Return Code: #{rc.inspect}")
+    if rc != true
+        exit MIQ_ABORT
+    end 
 
     #
     # Exit method
