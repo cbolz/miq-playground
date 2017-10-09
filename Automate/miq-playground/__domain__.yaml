@@ -6,8 +6,8 @@ object:
     name: miq-playground
     description: 
     display_name: 
-    priority: 6
+    priority: 2
     enabled: true
-    tenant_id: 99000000000001
+    tenant_id: 1000000000001
     source: remote
     top_level_namespace: 
