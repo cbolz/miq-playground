@@ -23,7 +23,7 @@ begin
   
     list = {}
 
-    $evm.vmdb("ext_management_system").each { |ems|
+    $evm.vmdb("ext_management_system").all.each { |ems|
         $evm.log("info", "Adding EMS with ID #{ems.id} and name #{ems.name} to the dialog")
         list[ems.id]=ems.name
     }
