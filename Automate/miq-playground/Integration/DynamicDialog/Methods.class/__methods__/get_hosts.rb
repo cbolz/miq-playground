@@ -25,11 +25,15 @@ begin
 
     list = {}
 
-    ems = $evm.vmdb("ext_management_system").find_by_id(provider_id)
-    ems.hosts.all.each { |host|
-        $evm.log("info", "Adding Host with ID #{host.id} and name #{host.name}")
-        list[host.id]=host.name
-    }
+    if provider_id.nil?
+        list["unspecified"]="Select Provider first"
+    else
+        ems = $evm.vmdb("ext_management_system").find_by_id(provider_id)
+        ems.hosts.all.each { |host|
+            $evm.log("info", "Adding Host with ID #{host.id} and name #{host.name}")
+            list[host.id]=host.name
+        }
+    end 
 
     dialog_field = $evm.object 
     
