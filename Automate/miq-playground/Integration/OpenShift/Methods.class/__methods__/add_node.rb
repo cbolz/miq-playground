@@ -17,10 +17,25 @@
 
 begin
     $evm.log("info", "EVM Automate Method Started")
+
+    def yaml_data(option)
+        @task.get_option(option).nil? ? nil : YAML.load(@task.get_option(option))
+    end
+      
+    def parsed_dialog_information
+        dialog_options_hash = yaml_data(:parsed_dialog_options)
+        #log(:info, "#{dialog_options_hash.inspect}")
+        return dialog_options_hash[0]
+    end
   
     # Dump all of root's attributes to the log
     $evm.root.attributes.sort.each { |k, v| $evm.log("info", "Root:<$evm.root> Attribute - #{k}: #{v}")}
   
+    #tenant = parsed_dialog_information[:]
+   
+    rc=system("/root/add_host_v2.sh")
+    $evm.log("info", "Return Code: #{rc}")
+
     #
     # Exit method
     #

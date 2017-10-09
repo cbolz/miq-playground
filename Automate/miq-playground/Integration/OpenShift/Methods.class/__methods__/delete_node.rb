@@ -21,7 +21,7 @@ begin
     # Dump all of root's attributes to the log
     $evm.root.attributes.sort.each { |k, v| $evm.log("info", "Root:<$evm.root> Attribute - #{k}: #{v}")}
   
-    rc=system("/root/add_host_v2.sh")
+    rc=system("/root/delete_host.sh")
     $evm.log("info", "Return Code: #{rc}")
 
     #
