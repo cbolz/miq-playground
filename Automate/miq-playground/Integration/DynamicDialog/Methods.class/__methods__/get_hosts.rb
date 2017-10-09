@@ -29,7 +29,7 @@ begin
         list["unspecified"]="Select Provider first"
     else
         ems = $evm.vmdb("ext_management_system").find_by_id(provider_id)
-        $evm.log("info", "User selected provider #{ems.name}: #{ems.inspect}")
+        $evm.log("info", "User selected provider #{ems.name}: #{ems.inspect} with hosts: #{ems.hosts.inspect}")
         ems.hosts.each { |host|
             $evm.log("info", "Adding Host with ID #{host.id} and name #{host.name}")
             list[host.id]=host.name
