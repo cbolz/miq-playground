@@ -33,7 +33,7 @@ begin
   
     random = (0...8).map { (65 + rand(26)).chr }.join
    
-    $evm.log("infO", "su - clouduser -c /home/clouduser/add_host_v2.sh &> /tmp/add_host-#{random}.log &")
+    $evm.log("info", "su - clouduser -c /home/clouduser/add_host_v2.sh &> /tmp/add_host-#{random}.log &")
     rc=system("su - clouduser -c /home/clouduser/add_host_v2.sh &> /tmp/add_host-#{random}.log &")
     $evm.log("info", "Return Code: #{rc.inspect}")
     if rc != true
