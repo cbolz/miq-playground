@@ -28,6 +28,8 @@ begin
         return dialog_options_hash[0]
     end
   
+    @task = $evm.root['service_template_provision_task']
+    
     # Dump all of root's attributes to the log
     $evm.root.attributes.sort.each { |k, v| $evm.log("info", "Root:<$evm.root> Attribute - #{k}: #{v}")}
 
