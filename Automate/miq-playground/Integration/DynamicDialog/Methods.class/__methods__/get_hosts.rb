@@ -62,8 +62,8 @@ begin
     #
     # Set Ruby rescue behavior
     #
-  rescue => err
+rescue => err
     $evm.log("error", "[#{err}]\n#{err.backtrace.join("\n")}")
     exit MIQ_ABORT
-  end
+end
   
