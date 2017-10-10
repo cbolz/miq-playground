@@ -26,9 +26,12 @@ begin
     random = (0...8).map { (65 + rand(26)).chr }.join
 
     $evm.log("info", "su - clouduser -c '/home/clouduser/delete_host.sh #{nodename}' &> /tmp/delete-#{random}.log")
-    #rc=system("su - clouduser -c '/home/clouduser/delete_host.sh #{nodename}' &> /tmp/delete-#{random}.log")
-    $evm.log("info", "Return Code: #{rc.inspect}")
-
+    
+    nodename.each { |node|
+        rc=system("su - clouduser -c '/home/clouduser/delete_host.sh #{node}' &> /tmp/delete-#{random}.log")
+        $evm.log("info", "Return Code: #{rc.inspect}")
+    }
+    
     if rc != true
         exit MIQ_ABORT
     end 
