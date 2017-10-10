@@ -31,7 +31,7 @@ begin
         ems = $evm.vmdb("ext_management_system").find_by_id(provider_id)
         $evm.log("info", "User selected provider #{ems.name}: #{ems.inspect}")
         ems.vms.each { |vm|
-            $evm.log("info", "Adding Host with ID #{vm.id} and name #{vm.name}")
+            $evm.log("info", "Found Host with ID #{vm.id} and name #{vm.name}")
             list[vm.name]=vm.name if vm.name =~ /^node(09|[1-9]+)/
         }
     end 
