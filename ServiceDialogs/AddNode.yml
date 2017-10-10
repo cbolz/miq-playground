@@ -1,0 +1,82 @@
+---
+- description: 
+  buttons: submit,cancel
+  label: Add OpenShift Node
+  blueprint_id: 
+  dialog_tabs:
+  - description: 
+    display: edit
+    label: General
+    display_method: 
+    display_method_options: 
+    position: 0
+    dialog_groups:
+    - description: 
+      display: edit
+      label: General
+      display_method: 
+      display_method_options: 
+      position: 0
+      dialog_fields:
+      - name: numberofnodes
+        description: Select the number of nodes you want to add
+        data_type: integer
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: '1'
+        values:
+        - - 
+          - "<Choose>"
+        - - '1'
+          - '1'
+        - - '2'
+          - '2'
+        - - '3'
+          - '3'
+        - - '4'
+          - '4'
+        - - '5'
+          - '5'
+        - - '6'
+          - '6'
+        - - '7'
+          - '7'
+        - - '8'
+          - '8'
+        - - '9'
+          - '9'
+        - - '10'
+          - '10'
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :description
+          :sort_order: :ascending
+          :force_multi_value: false
+        label: Number of nodes
+        position: 0
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: false
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: false
+        auto_refresh: 
+        trigger_auto_refresh: 
+        visible: true
+        type: DialogFieldDropDownList
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}

@@ -1,0 +1,108 @@
+---
+- description: 
+  buttons: submit,cancel
+  label: Delete OpenShift Node
+  blueprint_id: 
+  dialog_tabs:
+  - description: 
+    display: edit
+    label: General
+    display_method: 
+    display_method_options: 
+    position: 0
+    dialog_groups:
+    - description: 
+      display: edit
+      label: General
+      display_method: 
+      display_method_options: 
+      position: 0
+      dialog_fields:
+      - name: provider_id
+        description: Select the provider from which to delete the VM
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: '1000000000002'
+        values:
+        - - 1000000000002
+          - Azure
+        - - 1000000000003
+          - Azure Network Manager
+        - - 1000000000001
+          - openshift
+        values_method: 
+        values_method_options: {}
+        options:
+          :force_multi_value: false
+          :sort_by: :description
+          :sort_order: :ascending
+        label: Specify Provider
+        position: 0
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: true
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: false
+        auto_refresh: 
+        trigger_auto_refresh: true
+        visible: true
+        type: DialogFieldDropDownList
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: Integration/DynamicDialog
+          ae_class: Methods
+          ae_instance: get_providers
+          ae_message: 
+          ae_attributes: {}
+      - name: nodename
+        description: Enter short hostname to be deleted
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: unspecified
+        values:
+        - - unspecified
+          - Select Provider first
+        values_method: 
+        values_method_options: {}
+        options:
+          :force_multi_value: true
+          :sort_by: :description
+          :sort_order: :ascending
+        label: Specify Node Name
+        position: 1
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: true
+        show_refresh_button: false
+        load_values_on_init: 
+        read_only: false
+        auto_refresh: true
+        trigger_auto_refresh: 
+        visible: true
+        type: DialogFieldDropDownList
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: Integration/DynamicDialog
+          ae_class: Methods
+          ae_instance: get_hosts
+          ae_message: 
+          ae_attributes: {}
